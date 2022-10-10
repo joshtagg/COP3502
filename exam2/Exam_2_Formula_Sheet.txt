@@ -1,0 +1,186 @@
+----------BIG OH----------
+
+TREES:
+	AVL		Worst		Average		Best
+	Search		[O(logN)]	[O(logN)]	[O(1)]
+	Insert		[O(logN)]	[O(logN)]	[O(1)]
+	Delete		[O(logN)]	[O(logN)]	[O(1)]
+
+	BST		Worst		Average		Best
+	Search		[O(N)]		[O(logN)]	[O(1)]
+	Insert		[O(N)]		[O(logN)]	[O(1)]
+	Delete		[O(N)]		[O(logN)]	[O(1)]
+
+LINKED LISTS:
+
+	For cases below: Worst = Average = Best
+
+	Singular LL
+	Insert Head	[O(1)]
+	Insert Tail	[O(N)]
+	Remove Head	[O(1)]
+	Remove Tail	[O(N)]
+
+	Doubly with (HT) or (Circular):
+	Insert Head	[O(1)]
+	Insert Tail	[O(1)]
+	Remove Head	[O(1)]
+	Remove Tail	[O(1)]
+
+	Head Tail LL
+	Insert Head	[O(1)]
+	Insert Tail	[O(1)]
+	Remove Head	[O(1)]
+	Remove Tail	[O(N)]
+
+	Circular LL
+	Insert Head	[O(1)]
+	Insert Tail	[O(1)]
+	Remove Head	[O(1)]
+	Remove Tail	[O(N)]
+
+LINKED LIST STRUCTURES:
+	
+	For cases below: Worst = Average = Best
+	
+	Stack (Singular LL)
+	Push		[O(1)]
+	Pop		[O(1)]
+	Peek		[O(1)]
+
+	Queues (HT LL)
+	enqueue		[O(1)]
+	dequeue		[O(1)]
+	Peek		[O(1)]
+
+----------AVL INSERTION FORMULA EXAMPLES----------
+
+	 (A)                (B)
+	/   \              /   \
+      (B)   (C)         (D)     (A)
+      / \         ->    /       / \
+    (D) (E)           (F)     (E) (C)
+    /
+  (F)
+
+	 (A)              (C)
+        /                /   \
+      (B)         ->   (B)   (A)
+	\
+         (C)
+
+	 (A)                 (C)
+        /   \               /   \
+      (B)   (AR)  ->     (B)     (A)
+      / \                / \     /  \
+   (BL) (C)           (BL) (CL)(CR) (AR)
+        / \
+     (CL) (CR)
+
+Note: For examples of AVL tree problems, go to #helpful-stuff in discord.
+      Look at pics sent by Isaac.
+
+
+----------PRE-ORDER----------
+For every node: -()
+      	   -(A)
+       	   /   \
+      -(B)    -(C)
+      /  \     /  \
+   -(D) -(E)-(F) -(G)
+
+A, B, D, E, C, F, G
+
+void preOrder(Node * root){
+    if(root == NULL) return;
+    printf(" %d ", root->value);
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+----------IN-ORDER----------
+For every node: ( )
+		 |
+	  (A)
+         / | \
+      (B)     (C)
+     / | \   / | \
+   (D)   (E)(F) (G)
+    |     |  |   |
+
+D, B, E, A, F, C, G
+
+void inOrder(Node * root){
+    if(root == NULL) return;
+    inOrder(root->left);
+    printf(" %d ", root->value);
+    inOrder(root->right);
+}
+
+----------POST-ORDER----------
+For every node: ()-
+	  (A)-
+         /   \
+      (B)-    (C)-
+     /  \     /  \
+   (D)- (E)-(F)- (G)-
+
+D, E, B, F, G, C, A
+
+void postOrder(Node * root){
+    if(root == NULL) return;
+    postOrder(root->left);
+    postOrder(root->right);
+    printf(" %d ", root->value);
+}
+
+----------HIGH LEVEL LAGUAGE AVL (FROM PROF NOTES)----------
+
+	insert(Tree T, Value X) {
+		Normal BST insertion (T and X)
+		CurrentNode = Inserted Node	
+
+		while(CurrentNode is not an invalid node)
+			if(CurrentNode is Unbalanced)
+				Rebalance CurrentNode
+				return
+
+			end if
+			CurrentNode is set to it's parent
+		end while
+	}
+
+	removal(Tree T, Value X) {
+		Normal BST removal (T and X)
+		CurrentNode = Parent of Removed Node
+		
+		while(CurrentNode is not an invalid node)
+			if(CurrentNode is Unbalanced)
+				Rebalance CurrentNode
+			end if
+			CurrentNode is set to it's parent
+		end while
+	}
+
+	rebalance (Node X) {
+		if (X is heavy on left)
+			if(X's left is heavy on Right)
+				rotate X's left to the left
+			end if
+			rotate X to the right
+		else
+			if (X's right is heavy on Left)
+				rotate X's right to the right
+			end if
+			rotate X to the left
+		end if
+	}
+
+----------FILE RECOMENDATIONS----------
+	(FILES) BST operations: bst.c
+	(FILES) AVL operations: tree_rot.c
+	(FILES) Stack Operators: converter.c
+	(FILES) Linked Lists: Use your HomeWork 5
+	For examples of Stack Operators problems and rules, go to #helpful-stuff in discord.
+      	Look at pics sent by Isaac.
+
