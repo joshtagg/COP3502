@@ -1,0 +1,51 @@
+
+int array of player skills
+
+long long int total_excitement initialized to 0 in main
+
+// this could return the victor of the sub tree
+int tree_traversal ( root ) {
+    if ( the tree is empty )
+        victor is the next unused player in our array of players
+        return the skill of that player
+
+    if two players compete against each other
+        update the total_excitement by their skill difference
+
+    You don't need to store the victor in the root
+    return the victor's skill instead
+}
+
+// this could return a node that represents the victor and more
+Node tree_traversal ( root ) {
+    if ( the tree is empty )
+        create this node assign the victor as the next unused player
+        assign the total excitement of the sub-tree as 0
+        return the node
+
+    as your doing the traversal
+    you assign the right child to the tree_traversal of the right child
+    you assign the left child to the tree_traversal of the left child
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
